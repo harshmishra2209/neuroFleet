@@ -1,0 +1,144 @@
+public class javaExercise
+{
+    public static int largest(int[] arr)
+    {
+        int largest = arr[0];
+        for(int i = 1; i< arr.length; i++)
+        {
+
+            if(arr[i] > largest)
+            {
+                largest = arr[i];
+            }
+        }
+        return largest;
+    }
+
+    public static int secondlargest(int[] arr)
+    {
+        int largest = arr[0];
+        int slarge = -1;
+
+        for(int i = 0; i < arr.length; i++)
+        {
+            if(arr[i] > largest)
+            {
+                slarge = largest;
+                largest = arr[i];
+            }
+            if(arr[i] > slarge && arr[i] < largest)
+            {
+                slarge = arr[i];
+            }
+        }
+        return slarge;
+    }
+
+    public static boolean isSorted(int[] arr)
+    {
+        for(int i = 0; i < arr.length-1; i++)
+        {
+            if(arr[i] > arr[i+1])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int removeDuplicates(int[] nums)
+    {
+        int i = 0;
+        for(int j = 1; j < nums.length; j++)
+        {
+            if(nums[i] != nums[j])
+            {
+                nums[i+1] = nums[j];
+                i++;
+            }
+        }
+        return i+1;
+    }
+
+    public static int maxConsecutiveOnes(int[] nums)
+    {
+        int ctr = 0;
+        int maxi = 0;
+
+        for(int i = 0; i < nums.length; i++)
+        {
+            if(nums[i] == 1)
+            {
+                ctr++;
+                maxi = Math.max(maxi, ctr);
+            }
+            else
+            {
+                ctr = 0;
+            }
+        }
+        return maxi;
+    }
+
+    public static int singleNumber(int[] nums)
+    {
+        int result=0;
+        for(int i=0; i<nums.length;i++)
+        {
+            result = result^nums[i];
+        }
+        return result;
+    }
+
+    public static int missingNumber(int[] nums)
+    {
+        int i=0;
+        while(i < nums.length)
+        {
+            int correctIdx = nums[i];
+            if(nums[i] < nums.length && nums[i] != nums[correctIdx])
+            {
+                int temp = nums[i];
+                nums[i] = nums[correctIdx];
+                nums[correctIdx] = temp;
+            }
+            else
+            {
+                i++;
+            }
+        }
+
+        for(int j = 0; j < nums.length; j++)
+        {
+            if(nums[j] != j)
+            {
+                return j;
+            }
+        }
+        return nums.length;
+    }
+    public static void main(String[] args)
+    {
+        int[] arr = {4,8,1,2,0,3,9,3,7}; //1
+        int[] nums = {1,1,0,1,1,1}; //2
+        int[] duplicates = {0,0,1,1,1,2,2,3,3,4}; //3
+        int[] single = {4,1,2,1,2}; //4
+        int[] missing = {9,6,4,2,3,5,7,0,1}; //5
+        
+        System.out.println(largest(arr));//1
+        
+        System.out.println(secondlargest(arr)); //2
+        
+        System.out.println(isSorted(arr)); //3
+        
+        System.out.println(maxConsecutiveOnes(nums)); //4
+        
+        System.out.println(removeDuplicates(duplicates)); //5
+        
+        System.out.println(singleNumber(single));  //6
+         
+        System.out.println(missingNumber(missing));  //7
+
+
+    }
+}
