@@ -1,0 +1,71 @@
+//use database
+use harsh;
+
+
+//create table customers
+create table customers (id int , name varchar(40) , contact int , country varchar(40));
+
+insert into customers values (1 , "ramesh" , 12345 , "india");
+insert into customers values (2 , "suresh" , 67890 , "pakistan");
+insert into customers values (3 , "himesh" , 54321 , "america");
+insert into customers values (4 , "harsh" , 09876 , "russia");
+
+select * from customers;
+
+
+//create table orders
+create table orders (id int , custId int , odate date);
+
+insert into orders values (10308 , 2 , "1990-1-1");
+
+select * from orders;
+
+insert into orders values (10309 , 4 , "1985-1-1");
+insert into orders values (10310 , 3 , "1980-1-1");
+insert into orders values (10311 , 1 , "1970-1-1");
+
+select * from orders;
+
+
+//Inner Join
+select orders.id , customers.name , orders.odate from orders INNER JOIN customers ON orders.id = customers.id;
+
+//update query
+update orders set id = 2 where custId = 2;
+
+
+//Inner Join with Order By
+select customers.id , customers.contact , orders.custId from customers INNER JOIN orders ON customers.id = orders.custId order by custId;
+
+//Left Join 
+select customers.id , customers.contact , orders.custId from customers LEFT JOIN orders ON customers.id = orders.custId order by custId;
+
+
+//Right Join
+select customers.id , customers.contact , orders.custId from customers RIGHT JOIN orders ON customers.id = orders.custId order by custId;
+
+//Full Outer Join
+select customers.id , customers.contact , orders.custId from customers FULL OUTER JOIN orders ON customers.id = orders.custId;
+
+//Full Outer Join With Order By
+SELECT customers.id, customers.contact, orders.custId 
+FROM customers 
+FULL OUTER JOIN orders ON customers.id = orders.custId 
+ORDER BY customers.contact;
+
+
+
+//Union (selects unique entries)
+select customers.id , customers.contact , orders.custId from customers LEFT JOIN orders ON customers.id = orders.custId
+UNION
+select customers.id , customers.contact , orders.custId from customers RIGHT JOIN orders ON customers.id = orders.custId;
+
+select * from orders;
+
+//Not Equal to in SQL
+select customers.id , customers.contact , orders.custId from customers , orders where customers.id <> orders.id AND customers.id = orders.custId;
+
+select contact from customers group by contact;
+
+
+select * from customers;
